@@ -6,9 +6,11 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -28,9 +30,9 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(0,3));
 		// create the buttons
-		JButton deleteButton = new JButton("delete");
-		JButton editButton = new JButton("edit");
-		JButton selectButton = new JButton("select");
+		JButton deleteButton = new JButton("Delete");
+		JButton editButton = new JButton("Edit");
+		JButton selectButton = new JButton("Select");
 		// add the buttons to the JPanel
 		buttonsPanel.add(deleteButton);
 		buttonsPanel.add(editButton);
@@ -54,7 +56,27 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		exercisePanel.add(searchPanel, BorderLayout.NORTH);
 		
 		// create a list of exercises
+		JList<String> exercisesList = new JList<String>();
+		DefaultListModel<String> model = new DefaultListModel<String>();
+		model.addElement("Benchpress");
+		model.addElement("Squats");
+		model.addElement("Reverse flyes");
+		exercisesList.setModel(model);
+		//add the list to the exercise panel
+		exercisePanel.add(exercisesList, BorderLayout.CENTER);
 		
+		// create add button to add a exercise		
+		JButton addButton = new JButton("Add");
+		// create input field, to add new exercise
+		JTextField input = new JTextField();
+		//create new Panel to add a new exercise
+		JPanel createExercisePanel = new JPanel(new BorderLayout());
+		createExercisePanel.add(addButton, BorderLayout.EAST);
+		createExercisePanel.add(input, BorderLayout.CENTER);
+		
+		//add the createExercisePanel to the exercisePanel
+		exercisePanel.add(createExercisePanel, BorderLayout.SOUTH);
+			
 		//add the exercisePanel to the window
 		this.add(exercisePanel, BorderLayout.CENTER);
 		
