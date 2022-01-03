@@ -13,6 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class SelectExerciseGUI extends JFrame implements ActionListener {
 	// create the buttons
@@ -22,15 +24,16 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	//create search button to search
 	private JButton searchButton = new JButton("Search");
 	// create search field
-	private JTextField searchField = new JTextField("");
+	private final JTextField searchField = new JTextField("");
 	// create add button to add a exercise		
 	private	JButton addButton = new JButton("Add");
-	// create input field, to add new exercise
-	private JTextField input = new JTextField();
+	private JTextField input = new JTextField("");
 	// create a list of exercises
 	private JList<String> exercisesList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
+	// set default values
 	private String[] defaultValuesList = {"Bench press", "Squats", "Flyes"};
+	
 	public SelectExerciseGUI() {
 		// create window
 		this.setSize(500,600);
@@ -59,7 +62,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	
 		// add the search button and field to the search panel
 		searchPanel.add(searchButton, BorderLayout.EAST);
-		searchPanel.add(searchField, BorderLayout.CENTER);
+		searchPanel.add(this.createSearchField(), BorderLayout.CENTER);
 		// add the searchPanel to the exercise Panel
 		exercisePanel.add(searchPanel, BorderLayout.NORTH);
 		
@@ -69,6 +72,8 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		//add the list to the exercise panel
 		exercisePanel.add(exercisesList, BorderLayout.CENTER);
 		
+		
+
 		
 		//create new Panel to add a new exercise
 		JPanel createExercisePanel = new JPanel(new BorderLayout());
@@ -86,15 +91,54 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		editButton.addActionListener(this);
 		addButton.addActionListener(this);
 		selectButton.addActionListener(this);
-		
-		
+
 		this.setVisible(true);
 	}
-	
+	private JTextField createSearchField() {
+		
+		searchField.getDocument().addDocumentListener(new DocumentListener() {
+			@Override
+			public void insertUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				this.filter();
+			}
+
+			@Override
+			public void removeUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				this.filter();
+			}
+
+			@Override
+			public void changedUpdate(DocumentEvent e) {
+				// TODO Auto-generated method stub
+				
+			}
+			private void filter() {
+				filterModel();
+			}
+			
+			});
+		return searchField;
+	}
 	private void createDefaultListModel() {
 		   for (String s : defaultValuesList) {
 	            model.addElement(s);
 		   }
+	}
+	
+	public void filterModel() {
+		for (String s :defaultValuesList) {
+			if (!s.startsWith(searchField.getText())) {
+				if (model.contains(s)) {
+					model.removeElement(s);
+				}
+			} else {
+				if (!model.contains(s)) {
+					model.addElement(s);
+				}
+			}
+		}
 	}
 	
 	@Override
@@ -115,18 +159,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 			this.removeByIndex(index);
 		}
 		if (e.getSource() == searchButton) {
-			/*
-			 for (String s :defaultValueList) {
-		            if (!s.startsWith(searchField.getText())) {
-		                if (model.contains(s)) {
-		                    model.removeElement(s);
-		                }
-		            } else {
-		                if (!model.contains(s)) {
-		                    model.addElement(s);
-		                }
-		            }
-		        }*/
+	
 		}
 		
 		
