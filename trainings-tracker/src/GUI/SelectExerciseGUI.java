@@ -30,7 +30,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	// create a list of exercises
 	private JList<String> exercisesList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
-	
+	private String[] defaultValuesList = {"Bench press", "Squats", "Flyes"};
 	public SelectExerciseGUI() {
 		// create window
 		this.setSize(500,600);
@@ -64,9 +64,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		exercisePanel.add(searchPanel, BorderLayout.NORTH);
 		
 		
-		model.addElement("Benchpress");
-		model.addElement("Squats");
-		model.addElement("Reverse flyes");
+		this.createDefaultListModel();
 		exercisesList.setModel(model);
 		//add the list to the exercise panel
 		exercisePanel.add(exercisesList, BorderLayout.CENTER);
@@ -93,6 +91,12 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		this.setVisible(true);
 	}
 	
+	private void createDefaultListModel() {
+		   for (String s : defaultValuesList) {
+	            model.addElement(s);
+		   }
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -112,7 +116,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		}
 		if (e.getSource() == searchButton) {
 			/*
-			 for (String s :liste) {
+			 for (String s :defaultValueList) {
 		            if (!s.startsWith(searchField.getText())) {
 		                if (model.contains(s)) {
 		                    model.removeElement(s);
