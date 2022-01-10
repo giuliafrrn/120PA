@@ -36,22 +36,13 @@ public class EnterData  extends JFrame implements ActionListener{
 	private JButton addSet = new JButton("Add set");
 	private JButton continueButton = new JButton("Continue");
 	
-	// create a list of exercises
-	private JList<JTextField> exercisesList = new JList<JTextField>();
-	private DefaultListModel<JTextField> model = new DefaultListModel<JTextField>();
-
-	private ArrayList<SetRow> rows = new ArrayList<SetRow>();
+	//create panel for the sets
+	private JPanel setsPanel = new JPanel(new GridLayout(0,1));
 	
-	
-	SetRow row1 = new SetRow(1);
-	SetRow row2 = new SetRow(2);
-	SetRow row3 = new SetRow(3);
-	JPanel panelTest = new JPanel(new GridLayout(2,0));
-	JScrollPane scrollPane = new JScrollPane();
 	
 	public EnterData(String exerciseName) {
 			// create window
-			this.setSize(500,600);
+			this.setSize(500,300);
 			this.setLayout(new BorderLayout());
 			
 			// define title
@@ -74,30 +65,27 @@ public class EnterData  extends JFrame implements ActionListener{
 			this.add(exercisePanel, BorderLayout.CENTER);
 			
 			
+			this.addRows();
 			
-			
-			panelTest.add(row1.getPanel());
-			panelTest.add(row2.getPanel());
-			scrollPane.setViewportView(panelTest);
-			/*
-			scrollPane.add(row1.getPanel());
-			scrollPane.add(row2.getPanel());
-			scrollPane.add(row3.getPanel());
-		
-			*/
-			
-			
-			exercisePanel.add(scrollPane, BorderLayout.CENTER);
+			exercisePanel.add(setsPanel, BorderLayout.CENTER);
 			
 			this.setVisible(true);
 	}
 
+	private void addRows() {
+		setsPanel.add(new SetRow(1).getPanel());
+		setsPanel.add(new SetRow(2).getPanel());
+		setsPanel.add(new SetRow(3).getPanel());
+		setsPanel.add(new SetRow(4).getPanel());
+		setsPanel.add(new SetRow(5).getPanel());
+		setsPanel.add(new SetRow(6).getPanel());
+		
+		
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if ( e.getSource() == addSet) {
-			panelTest.add(row3.getPanel());
-			scrollPane.setViewportView(panelTest);
 		}
 			
 	}

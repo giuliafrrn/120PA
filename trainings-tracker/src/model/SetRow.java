@@ -2,6 +2,7 @@ package model;
 
 import java.awt.GridLayout;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -12,6 +13,7 @@ public class SetRow {
 	private JLabel weightLabel = new JLabel();
 	private JTextField repsTextField = new JTextField("");
 	private JTextField weightTextField = new JTextField("");
+	private JButton cancelButton = new JButton("X");	
 	private JPanel panel = new JPanel(new GridLayout(1,4));
 	
 	public SetRow(int counter) {
@@ -23,7 +25,8 @@ public class SetRow {
 		panel.add(repsLabel);
 		panel.add(repsTextField);
 		panel.add(weightLabel);
-		panel.add(repsTextField);
+		panel.add(weightTextField);
+		panel.add(cancelButton);
 		return panel;
 	}
 	public JLabel getRepsLabel() {
