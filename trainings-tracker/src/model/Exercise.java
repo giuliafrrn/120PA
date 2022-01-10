@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Exercise {
 	private String name;
-	private ArrayList<Set> sets;
+	private ArrayList<Set> sets = new ArrayList<Set>();
 	
 	public Exercise() {
 		
@@ -14,6 +14,12 @@ public class Exercise {
 		this.name = name;
 	}
 	
+	public Exercise(String name, ArrayList<Set> sets) {
+		super();
+		this.name = name;
+		this.sets = sets;
+	}
+
 	public String getName() {
 		return name;
 	}

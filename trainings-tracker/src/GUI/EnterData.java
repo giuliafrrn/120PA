@@ -1,10 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -16,9 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
 import model.Exercise;
+import model.Set;
 import model.SetRow;
+import repository.ExerciseRepositoryImpl;
 
-public class EnterData  extends JFrame implements ActionListener{
+public class EnterData extends JFrame implements ActionListener{
 	// create title
 	private JLabel title = new JLabel("Enter Data:");
 	// create exercise label, which shows which exercise was chosen
@@ -39,7 +39,7 @@ public class EnterData  extends JFrame implements ActionListener{
 	
 	private ArrayList<SetRow> rows = new ArrayList<SetRow>();
 	private int counter = 1;
-	
+	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
 	public EnterData(String exerciseName) {
 			// create window
 			this.setSize(500,300);
@@ -103,9 +103,7 @@ public class EnterData  extends JFrame implements ActionListener{
 		}
 			
 		if (e.getSource() == backButton) {
-			setsPanel.remove(1);
-			setsPanel.revalidate();
-			validate();
+			SelectExerciseGUI selectExercise = new SelectExerciseGUI();
 		}
 		
 		for (SetRow row : rows) {
@@ -117,7 +115,17 @@ public class EnterData  extends JFrame implements ActionListener{
 				validate();
 				break;
 			}
-			
+		}
+		
+		if (e.getSource() == continueButton) {
+			for (SetRow row : rows) {
+				int reps = Integer.parseInt(row.getRepsTextField().getText());
+				int weight = Integer.parseInt(row.getWeightTextField().getText());
+				Set set = new Set(reps, weight);
+				exercise.addSet(set);
+			}
+			repository.saveExercise(exercise);
+			DisplayData displayData = new DisplayData();
 		}
 	}
 }

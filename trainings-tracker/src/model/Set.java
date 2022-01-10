@@ -1,14 +1,20 @@
 package model;
 
 public class Set {
-	private String name;
 	private int reps;
+	private int weight;
 	
-	public String getName() {
-		return name;
+	public Set(int reps, int weight) {
+		super();
+		this.reps = reps;
+		this.weight = weight;
 	}
-	public void setName(String name) {
-		this.name = name;
+	
+	public int getWeight() {
+		return weight;
+	}
+	public void setWeight(int weight) {
+		this.weight = weight;
 	}
 	public int getReps() {
 		return reps;
