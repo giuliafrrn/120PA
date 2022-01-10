@@ -17,6 +17,10 @@ import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
+import model.Exercise;
+import repository.ExerciseRepository;
+import repository.ExerciseRepositoryImpl;
+
 public class SelectExerciseGUI extends JFrame implements ActionListener {
 	// create the buttons
 	private JButton deleteButton = new JButton("Delete");
@@ -34,19 +38,28 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	// set default values
 	private ArrayList<String> listValues = new ArrayList<String>();
-	
+	// create title
+	private JLabel title = new JLabel("Select Exercise:");
+	//create panels
+	private JPanel buttonsPanel = new JPanel();
+	// create panel to add all the exercie stuff, like the list and search...
+	private JPanel exercisePanel = new JPanel(new BorderLayout());
+	// create search panel
+	private JPanel searchPanel = new JPanel(new BorderLayout());
+	//create new Panel to add a new exercise
+	private JPanel createExercisePanel = new JPanel(new BorderLayout());
+	//create repository
+	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
 	public SelectExerciseGUI() {
 		// create window
 		this.setSize(500,600);
 		this.setLayout(new BorderLayout());
 		
-		// set title
-		JLabel title = new JLabel("Select Exercise:");
+		// define title
 		title.setFont(new Font("Serif", Font.PLAIN, 24));
 		this.add(title, BorderLayout.NORTH);
 		
 		// create panel for buttons
-		JPanel buttonsPanel = new JPanel();
 		buttonsPanel.setLayout(new GridLayout(0,3));
 		// add the buttons to the JPanel
 		buttonsPanel.add(deleteButton);
@@ -54,30 +67,20 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		buttonsPanel.add(selectButton);
 		// add the buttons panel to the window
 		this.add(buttonsPanel, BorderLayout.SOUTH);
-		
-		// create panel to add all the exercie stuff, like the list and search...
-		JPanel exercisePanel = new JPanel(new BorderLayout());
-		
-		// create search panel
-		JPanel searchPanel = new JPanel(new BorderLayout());
 	
+		this.createDefaultListModel();
+		
 		// add the search button and field to the search panel
 		searchPanel.add(searchButton, BorderLayout.EAST);
 		searchPanel.add(this.createSearchField(), BorderLayout.CENTER);
 		// add the searchPanel to the exercise Panel
 		exercisePanel.add(searchPanel, BorderLayout.NORTH);
 		
-		
-		this.createDefaultListModel();
+	
 		exercisesList.setModel(model);
 		//add the list to the exercise panel
 		exercisePanel.add(exercisesList, BorderLayout.CENTER);
 		
-		
-
-		
-		//create new Panel to add a new exercise
-		JPanel createExercisePanel = new JPanel(new BorderLayout());
 		createExercisePanel.add(addButton, BorderLayout.EAST);
 		createExercisePanel.add(input, BorderLayout.CENTER);
 		
@@ -122,24 +125,22 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 			});
 		return searchField;
 	}
+	
 	private void createDefaultListModel() {
-		listValues.add("Bench press");
-		listValues.add("Squats");
-		listValues.add("Reverse fly");
-		   for (String s : listValues) {
-	            model.addElement(s);
+		   for (Exercise s : repository.getAllExercises()) {
+	            model.addElement(s.getName());
 		   }
 	}
 	
 	public void filterModel() {
-		for (String s :listValues) {
-			if (!s.startsWith(searchField.getText())) {
-				if (model.contains(s)) {
-					model.removeElement(s);
+		for (Exercise s :repository.getAllExercises()) {
+			if (!s.getName().startsWith(searchField.getText())) {
+				if (model.contains(s.getName())) {
+					model.removeElement(s.getName());
 				}
 			} else {
-				if (!model.contains(s)) {
-					model.addElement(s);
+				if (!model.contains(s.getName())) {
+					model.addElement(s.getName());
 				}
 			}
 		}
@@ -150,35 +151,34 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getSource() == addButton) {
 			model.addElement(input.getText());
-			listValues.add(input.getText());
+			repository.saveExercise(new Exercise(input.getText()));
 			input.setText("");
 		}
 		if(e.getSource() == deleteButton) {
-			this.removeFromList();
+			// delete exercise from repository
+			repository.deleteExercise(repository.getExerciseByName(model.get(exercisesList.getSelectedIndex())));
 			this.removeByIndex();
 		}
 		
 		if (e.getSource() == editButton) {
 			// remove from list
 			input.setText(model.get(exercisesList.getSelectedIndex()));
-			this.removeFromList();
-			this.removeByIndex();
+			repository.deleteExercise(repository.getExerciseByName(model.get(exercisesList.getSelectedIndex())));
+			this.removeByIndex();	
 			
-			
+		}	
+		if(e.getSource() == selectButton) {
+			//TODO: select
 		}
-
+		
 		
 	}
+	
 	private void removeByIndex() {
 		int index = exercisesList.getSelectedIndex();
 		if (index >=0) {
 			model.remove(index);
 		}
-	}
-	private void removeFromList() {
-		int indexlist = listValues.indexOf(model.get(exercisesList.getSelectedIndex()));
-		listValues.remove(indexlist);
-		
 	}
 
 }
