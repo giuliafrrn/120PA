@@ -5,6 +5,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -32,7 +33,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	private JList<String> exercisesList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
 	// set default values
-	private String[] defaultValuesList = {"Bench press", "Squats", "Flyes"};
+	private ArrayList<String> listValues = new ArrayList<String>();
 	
 	public SelectExerciseGUI() {
 		// create window
@@ -122,13 +123,16 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		return searchField;
 	}
 	private void createDefaultListModel() {
-		   for (String s : defaultValuesList) {
+		listValues.add("Bench press");
+		listValues.add("Squats");
+		listValues.add("Reverse fly");
+		   for (String s : listValues) {
 	            model.addElement(s);
 		   }
 	}
 	
 	public void filterModel() {
-		for (String s :defaultValuesList) {
+		for (String s :listValues) {
 			if (!s.startsWith(searchField.getText())) {
 				if (model.contains(s)) {
 					model.removeElement(s);
@@ -146,28 +150,35 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		// TODO Auto-generated method stub
 		if (e.getSource() == addButton) {
 			model.addElement(input.getText());
+			listValues.add(input.getText());
 			input.setText("");
 		}
 		if(e.getSource() == deleteButton) {
-			int index = exercisesList.getSelectedIndex();
-			this.removeByIndex(index);
+			this.removeFromList();
+			this.removeByIndex();
 		}
 		
 		if (e.getSource() == editButton) {
-			int index = exercisesList.getSelectedIndex();
-			input.setText(model.get(index));
-			this.removeByIndex(index);
+			// remove from list
+			input.setText(model.get(exercisesList.getSelectedIndex()));
+			this.removeFromList();
+			this.removeByIndex();
+			
+			
 		}
-		if (e.getSource() == searchButton) {
-	
-		}
-		
+
 		
 	}
-	private void removeByIndex(int index) {
+	private void removeByIndex() {
+		int index = exercisesList.getSelectedIndex();
 		if (index >=0) {
 			model.remove(index);
 		}
+	}
+	private void removeFromList() {
+		int indexlist = listValues.indexOf(model.get(exercisesList.getSelectedIndex()));
+		listValues.remove(indexlist);
+		
 	}
 
 }
