@@ -26,8 +26,8 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	private JButton deleteButton = new JButton("Delete");
 	private	JButton editButton = new JButton("Edit");
 	private JButton selectButton = new JButton("Select");
-	//create search button to search
-	private JButton searchButton = new JButton("Search");
+	//create search label to search
+	private JLabel searchLabel = new JLabel("Search:");
 	// create search field
 	private final JTextField searchField = new JTextField("");
 	// create add button to add a exercise		
@@ -36,13 +36,11 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	// create a list of exercises
 	private JList<String> exercisesList = new JList<String>();
 	private DefaultListModel<String> model = new DefaultListModel<String>();
-	// set default values
-	private ArrayList<String> listValues = new ArrayList<String>();
 	// create title
 	private JLabel title = new JLabel("Select Exercise:");
 	//create panels
 	private JPanel buttonsPanel = new JPanel();
-	// create panel to add all the exercie stuff, like the list and search...
+	// create panel to add all the exercise stuff, like the list and search...
 	private JPanel exercisePanel = new JPanel(new BorderLayout());
 	// create search panel
 	private JPanel searchPanel = new JPanel(new BorderLayout());
@@ -50,6 +48,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	private JPanel createExercisePanel = new JPanel(new BorderLayout());
 	//create repository
 	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
+	
 	public SelectExerciseGUI() {
 		// create window
 		this.setSize(500,600);
@@ -71,7 +70,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		this.createDefaultListModel();
 		
 		// add the search button and field to the search panel
-		searchPanel.add(searchButton, BorderLayout.EAST);
+		searchPanel.add(searchLabel, BorderLayout.WEST);
 		searchPanel.add(this.createSearchField(), BorderLayout.CENTER);
 		// add the searchPanel to the exercise Panel
 		exercisePanel.add(searchPanel, BorderLayout.NORTH);
@@ -169,6 +168,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		}	
 		if(e.getSource() == selectButton) {
 			//TODO: select
+			EnterData enterData = new EnterData(model.get(exercisesList.getSelectedIndex()));
 		}
 		
 		
