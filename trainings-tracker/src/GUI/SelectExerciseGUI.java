@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
@@ -51,7 +52,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	
 	public SelectExerciseGUI() {
 		// create window
-		this.setSize(500,600);
+		this.setSize(500,400);
 		this.setLayout(new BorderLayout());
 		
 		// define title
@@ -78,7 +79,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	
 		exercisesList.setModel(model);
 		//add the list to the exercise panel
-		exercisePanel.add(exercisesList, BorderLayout.CENTER);
+		exercisePanel.add(new JScrollPane(exercisesList), BorderLayout.CENTER);
 		
 		createExercisePanel.add(addButton, BorderLayout.EAST);
 		createExercisePanel.add(input, BorderLayout.CENTER);
@@ -95,6 +96,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		addButton.addActionListener(this);
 		selectButton.addActionListener(this);
 
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
 	private JTextField createSearchField() {

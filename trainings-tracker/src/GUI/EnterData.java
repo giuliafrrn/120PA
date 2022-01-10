@@ -1,21 +1,19 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 import model.Exercise;
 import model.SetRow;
@@ -39,6 +37,8 @@ public class EnterData  extends JFrame implements ActionListener{
 	//create panel for the sets
 	private JPanel setsPanel = new JPanel(new GridLayout(0,1));
 	
+	private ArrayList<SetRow> rows = new ArrayList<SetRow>();
+	private int counter = 1;
 	
 	public EnterData(String exerciseName) {
 			// create window
@@ -67,27 +67,58 @@ public class EnterData  extends JFrame implements ActionListener{
 			
 			this.addRows();
 			
-			exercisePanel.add(setsPanel, BorderLayout.CENTER);
+			exercisePanel.add(new JScrollPane(setsPanel), BorderLayout.CENTER);
 			
+			
+			// add buttons to actions listener
+			backButton.addActionListener(this);
+			addSet.addActionListener(this);
+			continueButton.addActionListener(this);
+			this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			this.setVisible(true);
 	}
 
 	private void addRows() {
-		setsPanel.add(new SetRow(1).getPanel());
-		setsPanel.add(new SetRow(2).getPanel());
-		setsPanel.add(new SetRow(3).getPanel());
-		setsPanel.add(new SetRow(4).getPanel());
-		setsPanel.add(new SetRow(5).getPanel());
-		setsPanel.add(new SetRow(6).getPanel());
-		
+		while (counter < 4) {
+			SetRow row = new SetRow(counter);
+			setsPanel.add(row.getPanel());
+			row.getCancelButton().addActionListener(this);
+			rows.add(row);
+			counter+=1;
+		}
 		
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		if ( e.getSource() == addSet) {
+			SetRow row = new SetRow(counter);
+			setsPanel.add(row.getPanel());
+			rows.add(row);
+			row.getCancelButton().addActionListener(this);
+			setsPanel.revalidate();
+			validate();
+			counter+=1;
 		}
 			
+		if (e.getSource() == backButton) {
+			setsPanel.remove(1);
+			setsPanel.revalidate();
+			validate();
+		}
+		
+		for (SetRow row : rows) {
+			if (e.getSource() == row.getCancelButton()) {
+				int index = rows.indexOf(row);
+				rows.remove(index);
+				setsPanel.remove(row.getPanel());
+				setsPanel.revalidate();
+				validate();
+				break;
+			}
+			
+		}
 	}
 }
 	
