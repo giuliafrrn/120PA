@@ -14,4 +14,9 @@ public interface ExerciseRepository{
 	
 	void deleteExercise(Exercise exercise);
 	
+	void saveTrainingExercise(Exercise exercise);
+	
+	void deleteTrainingExercise(Exercise exercise);
+	
+	ArrayList<Exercise> getTraining();
 }

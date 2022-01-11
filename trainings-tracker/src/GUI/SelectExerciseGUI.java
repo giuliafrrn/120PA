@@ -48,9 +48,10 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	//create new Panel to add a new exercise
 	private JPanel createExercisePanel = new JPanel(new BorderLayout());
 	//create repository
-	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
+	private ExerciseRepositoryImpl repository;
 	
-	public SelectExerciseGUI() {
+	public SelectExerciseGUI(ExerciseRepositoryImpl repository) {
+		this.repository=repository;
 		// create window
 		this.setSize(500,400);
 		this.setLayout(new BorderLayout());
@@ -170,7 +171,7 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 		}	
 		if(e.getSource() == selectButton) {
 			//TODO: select
-			EnterData enterData = new EnterData(model.get(exercisesList.getSelectedIndex()));
+			EnterData enterData = new EnterData(model.get(exercisesList.getSelectedIndex()), repository);
 		}
 		
 		

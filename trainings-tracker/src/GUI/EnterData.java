@@ -39,8 +39,10 @@ public class EnterData extends JFrame implements ActionListener{
 	
 	private ArrayList<SetRow> rows = new ArrayList<SetRow>();
 	private int counter = 1;
-	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
-	public EnterData(String exerciseName) {
+	private ExerciseRepositoryImpl repository;
+	
+	public EnterData(String exerciseName, ExerciseRepositoryImpl repository) {
+			this.repository=repository;
 			// create window
 			this.setSize(500,300);
 			this.setLayout(new BorderLayout());
@@ -103,7 +105,7 @@ public class EnterData extends JFrame implements ActionListener{
 		}
 			
 		if (e.getSource() == backButton) {
-			SelectExerciseGUI selectExercise = new SelectExerciseGUI();
+			SelectExerciseGUI selectExercise = new SelectExerciseGUI(repository);
 		}
 		
 		for (SetRow row : rows) {
@@ -124,8 +126,8 @@ public class EnterData extends JFrame implements ActionListener{
 				Set set = new Set(reps, weight);
 				exercise.addSet(set);
 			}
-			repository.saveExercise(exercise);
-			DisplayData displayData = new DisplayData();
+			repository.saveTrainingExercise(exercise);
+			DisplayData displayData = new DisplayData(exercise, repository);
 		}
 	}
 }
