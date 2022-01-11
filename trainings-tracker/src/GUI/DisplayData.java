@@ -87,7 +87,12 @@ public class DisplayData extends JFrame implements ActionListener {
 			repository.deleteTrainingExercise(lastExercise);
 		}
 		
-		
+		if (e.getSource() == addButton) {
+			SelectExerciseGUI selectExercise = new SelectExerciseGUI(repository);
+		}
+		if (e.getSource() == finishButton) {
+			ConfirmFinish finish = new ConfirmFinish(lastExercise, repository);
+		}
 	}
 
 }
