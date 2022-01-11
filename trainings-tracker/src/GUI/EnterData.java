@@ -68,7 +68,6 @@ public class EnterData extends JFrame implements ActionListener{
 			
 			
 			this.addRows();
-			
 			exercisePanel.add(new JScrollPane(setsPanel), BorderLayout.CENTER);
 			
 			
