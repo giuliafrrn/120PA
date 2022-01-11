@@ -35,7 +35,7 @@ public class EnterData extends JFrame implements ActionListener{
 	private JButton continueButton = new JButton("Continue");
 	
 	//create panel for the sets
-	private JPanel setsPanel = new JPanel(new GridLayout(0,1));
+	private JPanel setsPanel = new JPanel(new GridLayout(0,1,10,10));
 	
 	private ArrayList<SetRow> rows = new ArrayList<SetRow>();
 	private int counter = 1;

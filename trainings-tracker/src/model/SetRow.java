@@ -15,7 +15,7 @@ public class SetRow {
 	private JTextField repsTextField = new JTextField("");
 	private JTextField weightTextField = new JTextField("");
 	private JButton cancelButton = new JButton("X");	
-	private JPanel panel = new JPanel(new GridLayout(1,4));
+	private JPanel panel = new JPanel(new GridLayout(1,4,10,10));
 	
 	public SetRow(int counter) {
 		this.id = counter;
