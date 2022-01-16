@@ -1,6 +1,8 @@
 package GUI;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,18 +22,18 @@ public class ConfirmFinish extends JFrame implements ActionListener {
 	private JLabel textLabel = new JLabel("Are you sure you want to quit your training?");
 	private JPanel buttonsPanel = new JPanel(new GridLayout(1,2));
 	private Exercise lastExercise;
-	
+	private JPanel textPanel = new JPanel();
 	public ConfirmFinish(Exercise lastExercise,ExerciseRepositoryImpl repository){
 		this.repository=repository;
 		this.lastExercise = lastExercise;
 		// create window
-		this.setSize(500,200);
-		this.setLayout(new BorderLayout());
-		
+		this.setSize(400,200);
+		this.setLayout(new BorderLayout(50,50));
 		buttonsPanel.add(yesButton);
 		buttonsPanel.add(noButton);
 		this.add(buttonsPanel, BorderLayout.SOUTH);
-		this.add(textLabel, BorderLayout.CENTER);
+		textPanel.add(textLabel);
+		this.add(textPanel, BorderLayout.CENTER);
 		yesButton.addActionListener(this);
 		noButton.addActionListener(this);
 		

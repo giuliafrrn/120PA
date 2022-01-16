@@ -1,4 +1,4 @@
-import GUI.SelectExerciseGUI;
+import GUI.SelectExercise;
 import repository.ExerciseRepositoryImpl;
 
 public class TraingstrackerApplication {
@@ -7,7 +7,7 @@ public class TraingstrackerApplication {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		SelectExerciseGUI selectExercise = new SelectExerciseGUI(repository);
+		SelectExercise selectExercise = new SelectExercise(repository);
 	}
 
 }

@@ -22,7 +22,7 @@ import model.Exercise;
 import repository.ExerciseRepository;
 import repository.ExerciseRepositoryImpl;
 
-public class SelectExerciseGUI extends JFrame implements ActionListener {
+public class SelectExercise extends JFrame implements ActionListener {
 	// create the buttons
 	private JButton deleteButton = new JButton("Delete");
 	private	JButton editButton = new JButton("Edit");
@@ -50,14 +50,14 @@ public class SelectExerciseGUI extends JFrame implements ActionListener {
 	//create repository
 	private ExerciseRepositoryImpl repository;
 	
-	public SelectExerciseGUI(ExerciseRepositoryImpl repository) {
+	public SelectExercise(ExerciseRepositoryImpl repository) {
 		this.repository=repository;
 		// create window
-		this.setSize(500,400);
+		this.setSize(400,400);
 		this.setLayout(new BorderLayout());
 		
 		// define title
-		title.setFont(new Font("Serif", Font.PLAIN, 24));
+		title.setFont(new Font("SansSerif", Font.BOLD, 24));
 		this.add(title, BorderLayout.NORTH);
 		
 		// create panel for buttons

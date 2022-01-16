@@ -31,15 +31,15 @@ public class DisplayData extends JFrame implements ActionListener {
 	
 	private ExerciseRepositoryImpl repository = new ExerciseRepositoryImpl();
 	
-	private JPanel exercisesPanel = new JPanel(new GridLayout(0,1, 10, 10));
+	private JPanel exercisesPanel = new JPanel(new GridLayout(0,1));
 	private Exercise lastExercise;
 	
 	public DisplayData(Exercise lastExercise, ExerciseRepositoryImpl repository) {
 		this.lastExercise = lastExercise;
 		this.repository=repository;
 		// create window
-		this.setSize(500,600);
-		this.setLayout(new BorderLayout(60,60));
+		this.setSize(400,300);
+		this.setLayout(new BorderLayout());
 		
 		// add buttons to buttons panel
 		buttonsPanel.add(backButton);
@@ -56,7 +56,7 @@ public class DisplayData extends JFrame implements ActionListener {
 		this.add(contentPanel, BorderLayout.CENTER);
 	
 		// define title
-		title.setFont(new Font("Serif", Font.PLAIN, 24));
+		title.setFont(new Font("SansSerif", Font.BOLD, 24));
 		this.add(title, BorderLayout.NORTH);
 		
 		backButton.addActionListener(this);
@@ -87,7 +87,7 @@ public class DisplayData extends JFrame implements ActionListener {
 		}
 		
 		if (e.getSource() == addButton) {
-			SelectExerciseGUI selectExercise = new SelectExerciseGUI(repository);
+			SelectExercise selectExercise = new SelectExercise(repository);
 		}
 		if (e.getSource() == finishButton) {
 			ConfirmFinish finish = new ConfirmFinish(lastExercise, repository);

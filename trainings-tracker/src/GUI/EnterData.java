@@ -44,11 +44,11 @@ public class EnterData extends JFrame implements ActionListener{
 	public EnterData(String exerciseName, ExerciseRepositoryImpl repository) {
 			this.repository=repository;
 			// create window
-			this.setSize(500,300);
+			this.setSize(400,300);
 			this.setLayout(new BorderLayout());
 			
 			// define title
-			title.setFont(new Font("Serif", Font.PLAIN, 24));
+			title.setFont(new Font("SansSerif", Font.BOLD, 24));
 			this.add(title, BorderLayout.NORTH);
 			
 			// add the buttons to the buttons panel
@@ -104,7 +104,7 @@ public class EnterData extends JFrame implements ActionListener{
 		}
 			
 		if (e.getSource() == backButton) {
-			SelectExerciseGUI selectExercise = new SelectExerciseGUI(repository);
+			SelectExercise selectExercise = new SelectExercise(repository);
 		}
 		
 		for (SetRow row : rows) {
