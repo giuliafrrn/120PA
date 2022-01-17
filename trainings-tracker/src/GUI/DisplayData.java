@@ -69,7 +69,6 @@ public class DisplayData extends JFrame implements ActionListener {
 		
 	}
 	private void displayExercise() {
-		System.out.print(repository.getTraining());
 		for (Exercise exercise : repository.getTraining()) {
 			exercisesPanel.add(new JLabel(exercise.getName()));
 		}

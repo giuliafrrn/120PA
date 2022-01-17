@@ -27,8 +27,8 @@ public class ConfirmFinish extends JFrame implements ActionListener {
 		this.repository=repository;
 		this.lastExercise = lastExercise;
 		// create window
-		this.setSize(400,200);
-		this.setLayout(new BorderLayout(50,50));
+		this.setSize(400,120);
+		this.setLayout(new BorderLayout());
 		buttonsPanel.add(yesButton);
 		buttonsPanel.add(noButton);
 		this.add(buttonsPanel, BorderLayout.SOUTH);
