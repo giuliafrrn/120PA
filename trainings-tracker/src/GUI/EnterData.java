@@ -44,7 +44,7 @@ public class EnterData extends JFrame implements ActionListener{
 	public EnterData(String exerciseName, ExerciseRepositoryImpl repository) {
 			this.repository=repository;
 			// create window
-			this.setSize(400,300);
+			this.setSize(420,300);
 			this.setLayout(new BorderLayout());
 			
 			// define title

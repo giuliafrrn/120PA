@@ -38,7 +38,7 @@ public class DisplayData extends JFrame implements ActionListener {
 		this.lastExercise = lastExercise;
 		this.repository=repository;
 		// create window
-		this.setSize(400,300);
+		this.setSize(420,300);
 		this.setLayout(new BorderLayout());
 		
 		// add buttons to buttons panel
@@ -70,7 +70,7 @@ public class DisplayData extends JFrame implements ActionListener {
 	}
 	private void displayExercise() {
 		for (Exercise exercise : repository.getTraining()) {
-			exercisesPanel.add(new JLabel(exercise.getName()));
+			exercisesPanel.add(new JLabel(" - "+exercise.getName()));
 		}
 		
 		

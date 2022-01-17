@@ -53,7 +53,7 @@ public class SelectExercise extends JFrame implements ActionListener {
 	public SelectExercise(ExerciseRepositoryImpl repository) {
 		this.repository=repository;
 		// create window
-		this.setSize(400,400);
+		this.setSize(420,400);
 		this.setLayout(new BorderLayout());
 		
 		// define title
